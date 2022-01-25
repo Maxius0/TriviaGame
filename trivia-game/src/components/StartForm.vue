@@ -7,21 +7,21 @@ const store = useStore();
 const emit = defineEmits(["onAuthSuccess"]);
 
 const username = ref("");
+const displayError = ref("");
 
-const onSubmit = async () => {
-  const [error, user] = await apiUserRegister(username.value);
+const onStartClick = async (action) => {
+  const error = await store.dispatch("start", { action, username });
 
   if (error != null) {
     displayError.value = error;
   } else {
-    store.commit("setUser", user);
     emit("onAuthSuccess");
   }
 };
 </script>
 
 <template>
-  <form @submit.prevent="onSubmit">
+  <form @submit.prevent="onStartClick('start')">
     <fieldset class="mb-3">
       <label for="username" aria-label="Username" class="block">Username</label>
       <input
