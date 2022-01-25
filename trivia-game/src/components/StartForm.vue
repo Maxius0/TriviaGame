@@ -6,7 +6,12 @@ import { apiUserRegister } from "../api/users";
 const store = useStore();
 const emit = defineEmits(["onAuthSuccess"]);
 
-const username = ref("");
+let username = ref("");
+
+if (store.state.user != null) {
+  username = ref(store.state.user.username);
+}
+
 const displayError = ref("");
 
 const onStartClick = async (action) => {

@@ -40,5 +40,6 @@ export default createStore({
         return e.message;
       }
     },
+    async fetchAllQuestions({ commit }) {},
   },
 });
