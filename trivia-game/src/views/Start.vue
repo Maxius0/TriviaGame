@@ -1,8 +1,12 @@
 <script setup>
+import { useRouter } from "vue-router";
 import StartForm from "../components/StartForm.vue";
+
+const router = useRouter();
 
 const handleAuthSuccess = () => {
   console.log("user is available");
+  router.push("/question");
 };
 </script>
 

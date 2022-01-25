@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { useStore } from "vuex";
 import { apiUserRegister } from "../api/users";
 
 const store = useStore();
@@ -13,7 +14,7 @@ const onSubmit = async () => {
   if (error != null) {
     displayError.value = error;
   } else {
-    store.commit();
+    store.commit("setUser", user);
     emit("onAuthSuccess");
   }
 };
