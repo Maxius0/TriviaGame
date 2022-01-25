@@ -3,6 +3,13 @@ import { API_KEY } from ".";
 
 export async function apiUserRegister(username) {
   try {
+    let response = await fetch(`${BASE_URL}/trivia`);
+    let data = await response.json();
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].username === username) {
+        return [null, data[i]];
+      }
+    }
     const config = {
       method: "POST",
       headers: {
@@ -14,19 +21,25 @@ export async function apiUserRegister(username) {
         highScore: 0,
       }),
     };
-    const response = await fetch(`${BASE_URL}/trivia`, config);
-    const data = await response.json();
+    response = await fetch(`${BASE_URL}/trivia`, config);
+    data = await response.json();
     return [null, data];
   } catch (error) {
     return [error.message, null];
   }
 }
 
-export async function checkUsername(username){
+export async function apiUserLogin(username) {
   try {
-    const config = {
-      method = "GET"
+    const response = await fetch(`${BASE_URL}/trivia`);
+    const data = await response.json();
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].username === username) {
+        return [null, data[i]];
+      }
     }
-    const response = await fetch(`${BASE_URL}/trivia`, config)
+    return;
+  } catch (error) {
+    console.log(error);
   }
 }
