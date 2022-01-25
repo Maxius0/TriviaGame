@@ -1,9 +1,9 @@
-import { BASE_URL } from ".";
-import { API_KEY } from ".";
+import { BASE_URL_NOROFF } from ".";
+import { API_KEY_USERS } from ".";
 
 export async function apiUserRegister(username) {
   try {
-    let response = await fetch(`${BASE_URL}/trivia`);
+    let response = await fetch(`${BASE_URL_NOROFF}/trivia`);
     let data = await response.json();
     for (let i = 0; i < data.length; i++) {
       if (data[i].username === username) {
@@ -13,7 +13,7 @@ export async function apiUserRegister(username) {
     const config = {
       method: "POST",
       headers: {
-        "X-API-Key": API_KEY,
+        "X-API-Key": API_KEY_USERS,
         "content-type": "application/json",
       },
       body: JSON.stringify({
@@ -21,7 +21,7 @@ export async function apiUserRegister(username) {
         highScore: 0,
       }),
     };
-    response = await fetch(`${BASE_URL}/trivia`, config);
+    response = await fetch(`${BASE_URL_NOROFF}/trivia`, config);
     data = await response.json();
     return [null, data];
   } catch (error) {
@@ -31,7 +31,7 @@ export async function apiUserRegister(username) {
 
 export async function apiUserLogin(username) {
   try {
-    const response = await fetch(`${BASE_URL}/trivia`);
+    const response = await fetch(`${BASE_URL_NOROFF}/trivia`);
     const data = await response.json();
     for (let i = 0; i < data.length; i++) {
       if (data[i].username === username) {

@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import { apiFetchAllQuestions } from "./api/questions";
 import { apiUserRegister } from "./api/users";
 
 const initUser = () => {
@@ -13,10 +14,14 @@ const initUser = () => {
 export default createStore({
   state: {
     user: initUser(),
+    questions: [],
   },
   mutations: {
     setUser: (state, user) => {
       state.user = user;
+    },
+    setQuestions: (state, questions) => {
+      state.questions = questions;
     },
   },
   actions: {
@@ -40,6 +45,14 @@ export default createStore({
         return e.message;
       }
     },
-    async fetchAllQuestions({ commit }) {},
+    async fetchAllQuestions({ commit }) {
+      const [error, questions] = await apiFetchAllQuestions();
+      if (error !== null) {
+        return error;
+      }
+
+      commit("setQuestions", questions);
+      return null;
+    },
   },
 });
